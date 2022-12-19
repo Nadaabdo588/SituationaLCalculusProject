@@ -23,7 +23,7 @@ x,y - agent's loc, c- curr capacity, h- curr ships
 /*agent_loc(X,Y), ships_loc(H), agentState(X,Y,0,H,s0).*/
 agentState(0,1,0,[[2,2],[1,2]],s0).
 agentState(X,Y,C,H,result(A,S)):-
-	(agentState(X,Y,C2,H,S), A=drop, station(X,Y), C == 0, C2>0);
+	(agentState(X,Y,C2,H,S), A=drop, station(X,Y),  C2>0, C = 0);
 	(agentState(X,Y,C2,H2,S), A=pickup, shipExists(X,Y), capacity(Max),
 	C2<Max, C is C2+1, remover([X,Y], H2, H));
 	(agentState(X2,Y,C,H,S), A=up, X2>0, X is X2-1);
