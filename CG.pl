@@ -33,12 +33,13 @@ agentState(X,Y,C,H,result(A,S)):-
 
 
 
-goal(S):- agentState(_,_,C,H,S), C == 0, H == [].
+goal(S):- ids(S,0).
 
+goal2(S) :- agentState(_,_,C,H,S), C == 0, H == [].
 
 ids(S,L):-
-	(call_with_depth_limit(goal(S),L,R), number(R));
-	(call_with_depth_limit(goal(S),L,R), R=depth_limit_exceeded,
+	(call_with_depth_limit(goal2(S),L,R), number(R));
+	(call_with_depth_limit(goal2(S),L,R), R=depth_limit_exceeded,
 	L1 is L+1, ids(S,L1)).
 
 /*
