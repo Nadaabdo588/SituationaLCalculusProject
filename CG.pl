@@ -29,11 +29,11 @@ agentState(X, Y, C, Ships, result(A, S)):-
 	(agentState(X, Y2, C, Ships, S), A=left, Y2>0, Y is Y2-1);
 	(agentState(X, Y2, C, Ships, S), A=right, grid(_, W), Y2<W-1, Y is Y2+1).
 
-goal(S):- agentState(_, _, C, Ships, S), C == 0, Ships == [].
-
-
+goal(S):-
+        ids(S,1).
 ids(S,L):-
-	(call_with_depth_limit(goal(S),L,R), number(R));
-	(call_with_depth_limit(goal(S),L,R), R=depth_limit_exceeded,
+	(call_with_depth_limit(goal2(S),L,R), number(R));
+	(call_with_depth_limit(goal2(S),L,R), R=depth_limit_exceeded,
 	L1 is L+1, ids(S,L1)).
 	
+goal2(S):- agentState(_, _, C, Ships, S), C == 0, Ships == [].
